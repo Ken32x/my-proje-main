@@ -20,7 +20,9 @@ const Login = () => {
 
   return (
     <div className="login-container">
-      <h2>Giriş Yap</h2>
+      <div className="login-title-box">
+        <h2>Giriş Yap</h2>
+      </div>
       <div className="login-form">
         <input 
           type="text" 

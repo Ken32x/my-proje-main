@@ -3,7 +3,7 @@ import ScrollableCards from "@/components/ScrollableCards";
 import InfoSection from "@/components/InfoSection";
 import Topbar from "@/components/Topbar";
 import Footer from "@/components/footer";
-
+import HizmetKonumSlider from "@/components/HizmetKonumSlider";
 
 
 
@@ -28,7 +28,9 @@ export default function Home() {
         </section>
 
         {/* Bilgilendirme Alanı */}
+       
         <InfoSection />
+         <HizmetKonumSlider />
         <Footer />
         
         

@@ -56,63 +56,57 @@ const Panel = () => {
     <div className="panel-container">
       <TopbarPanel />
 
-      {/* Fotoğraflar Bölümü */}
-      <div className="section">
-       
-        <h3>Fotoğraflar</h3>
-       
-        <div className="media-grid">
-          {photos.map((photo) => {
-            const inputRef = useRef(null);
-            return (
-              <div key={photo.id} className="media-item" onClick={() => handleClick(inputRef)}>
-                {photo.url ? (
-                  <img src={photo.url} alt={photo.name} className="media-preview" />
-                ) : (
-                  <div className="upload-placeholder">Fotoğraf Yükle</div>
-                )}
-                <input
-                  type="file"
-                  accept="image/*"
-                  ref={inputRef}
-                  onChange={(e) => handlePhotoUpload(e, photo.id)}
-                  className="upload-input"
-                />
-                <div className="media-date">{photo.date}</div>
-              </div>
-            );
-          })}
-        </div>
+      {/* Fotoğraflar Başlığı */}
+      <div className="panel-section-title-box">📷 Fotoğraflar</div>
+      <div className="media-grid">
+        {photos.map((photo) => {
+          const inputRef = useRef(null);
+          return (
+            <div key={photo.id} className="media-item" onClick={() => handleClick(inputRef)}>
+              {photo.url ? (
+                <img src={photo.url} alt={photo.name} className="media-preview" />
+              ) : (
+                <div className="upload-placeholder">Fotoğraf Yükle</div>
+              )}
+              <input
+                type="file"
+                accept="image/*"
+                ref={inputRef}
+                onChange={(e) => handlePhotoUpload(e, photo.id)}
+                className="upload-input"
+              />
+              <div className="media-date">{photo.date}</div>
+            </div>
+          );
+        })}
       </div>
 
-      {/* Videolar Bölümü */}
-      <div className="section">
-        <h3>Videolar</h3>
-        <div className="media-grid">
-          {videos.map((video) => {
-            const inputRef = useRef(null);
-            return (
-              <div key={video.id} className="media-item" onClick={() => handleClick(inputRef)}>
-                {video.url ? (
-                  <video controls className="media-preview">
-                    <source src={video.url} type="video/mp4" />
-                    Tarayıcınız video etiketini desteklemiyor.
-                  </video>
-                ) : (
-                  <div className="upload-placeholder">Video Yükle</div>
-                )}
-                <input
-                  type="file"
-                  accept="video/*"
-                  ref={inputRef}
-                  onChange={(e) => handleVideoUpload(e, video.id)}
-                  className="upload-input"
-                />
-                <div className="media-date">{video.date}</div>
-              </div>
-            );
-          })}
-        </div>
+      {/* Videolar Başlığı */}
+      <div className="panel-section-title-box">🎥 Videolar</div>
+      <div className="media-grid">
+        {videos.map((video) => {
+          const inputRef = useRef(null);
+          return (
+            <div key={video.id} className="media-item" onClick={() => handleClick(inputRef)}>
+              {video.url ? (
+                <video controls className="media-preview">
+                  <source src={video.url} type="video/mp4" />
+                  Tarayıcınız video etiketini desteklemiyor.
+                </video>
+              ) : (
+                <div className="upload-placeholder">Video Yükle</div>
+              )}
+              <input
+                type="file"
+                accept="video/*"
+                ref={inputRef}
+                onChange={(e) => handleVideoUpload(e, video.id)}
+                className="upload-input"
+              />
+              <div className="media-date">{video.date}</div>
+            </div>
+          );
+        })}
       </div>
     </div>
   );

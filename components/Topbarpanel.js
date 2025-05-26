@@ -1,16 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import { FaMoon, FaSun, FaBell, FaUserCircle, FaUpload } from 'react-icons/fa';
 
 const TopbarPanel = () => {
   const router = useRouter();
-
-  const handleLoginClick = () => {
-    router.push('/login'); 
-  };
+  const [showMenu, setShowMenu] = useState(false);
 
   const handleUploadClick = () => {
     router.push('/upload');
+  };
+
+  const handleLogout = () => {
+    router.push('/');
   };
 
   return (
@@ -30,15 +31,19 @@ const TopbarPanel = () => {
         <button onClick={handleUploadClick} className="menu-button">
           <FaUpload style={{ marginRight: '6px' }} /> Anı Yükle
         </button>
-        <button className="icon-button">
-          <FaBell />
-        </button>
-        <button className="icon-button">
-          <FaMoon />
-        </button>
-        <button onClick={handleLoginClick} className="icon-button">
-          <FaUserCircle />
-        </button>
+        <button className="icon-button"><FaBell /></button>
+        <button className="icon-button"><FaMoon /></button>
+
+        <div className="user-menu-wrapper">
+          <button className="icon-button" onClick={() => setShowMenu(!showMenu)}>
+            <FaUserCircle />
+          </button>
+          {showMenu && (
+            <div className="user-dropdown">
+              <button onClick={handleLogout}>Çıkış</button>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
