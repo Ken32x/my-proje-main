@@ -1,22 +1,43 @@
-import React from "react";
-import Image from "next/image";
-import { useRouter } from "next/navigation";
+import React from 'react';
+import { useRouter } from 'next/router';
+import { FaMoon, FaSun, FaBell, FaUserCircle, FaUpload } from 'react-icons/fa';
 
 const TopbarPanel = () => {
   const router = useRouter();
 
-  const handleLogout = () => {
-    router.push("/login");
+  const handleLoginClick = () => {
+    router.push('/login'); 
+  };
+
+  const handleUploadClick = () => {
+    router.push('/upload');
   };
 
   return (
-    <div className="topbar-panel-container">
-      <div className="topbar-panel-logo-container">
-        <Image src="/logo.jpg" alt="Logo" width={50} height={50} />
+    <div className="topbar-panel">
+      <div className="logo-container">
+        <div className="logo">
+          <img src="/logo.jpg" alt="catch the moments" />
+        </div>
+        <div className="logo-text">Catch the Moments</div>
       </div>
-      <div className="topbar-panel-logout-container">
-        <button className="topbar-panel-logout-button" onClick={handleLogout}>
-          Çıkış Yap
+
+      <div className="center-items">
+        <input type="text" placeholder="Anı ara..." className="search-input" />
+      </div>
+
+      <div className="menu">
+        <button onClick={handleUploadClick} className="menu-button">
+          <FaUpload style={{ marginRight: '6px' }} /> Anı Yükle
+        </button>
+        <button className="icon-button">
+          <FaBell />
+        </button>
+        <button className="icon-button">
+          <FaMoon />
+        </button>
+        <button onClick={handleLoginClick} className="icon-button">
+          <FaUserCircle />
         </button>
       </div>
     </div>

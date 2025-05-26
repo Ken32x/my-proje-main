@@ -12,9 +12,8 @@
 
 
   
-
-/* Topbar */
-.topbar-container {
+/* Minimal Topbar */
+.topbar-minimal {
   width: 100%;
   height: 80px;
   background-color: #f5eadf;
@@ -22,49 +21,72 @@
   align-items: center;
   justify-content: space-between;
   padding: 0 20px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   position: sticky;
   top: 0;
   z-index: 100;
 }
 
-.logo-container {
+/* Sol logo alanı */
+.topbar-minimal .logo-container {
   display: flex;
   align-items: center;
-  gap: 15px;  /* Logo ve metin arasındaki mesafeyi arttıralım */
+  gap: 12px;
 }
 
-.logo img {
-  width: 80px;  /* Logoyu büyütüyoruz */
+.topbar-minimal .logo img {
+  width: 60px;
   height: auto;
-  overflow: hidden;
 }
 
-.logo-text {
-  font-size: 1.7rem;  /* Yazı boyutunu biraz küçültüyoruz */
+.topbar-minimal .logo-text {
+  font-size: 1.5rem;
   font-weight: bold;
-  color: #ff8c42;  
+  color: #ff8c42;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  letter-spacing: 1px;  /* Harf aralığını biraz azaltalım */
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);  /* Hafif gölge */
 }
 
 
 
-.menu button {
-  padding: 10px 20px;
-  background-color: #ff8c42;
-  color: #ffffff;
+
+/* Ortadaki arama alanı */
+.topbar-minimal .center-items {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.topbar-minimal .search-input {
+  padding: 8px 16px;
+  border-radius: 12px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  width: 300px;
+}
+
+/* Sağdaki ikonlar */
+.topbar-minimal .menu {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.topbar-minimal .icon-button {
+  background: none;
   border: none;
+  font-size: 1.4rem;
   cursor: pointer;
-  border-radius: 8px;
-  transition: background-color 0.3s ease;
+  color: #444;
+  transition: transform 0.2s ease, color 0.2s ease;
 }
-  
 
+.topbar-minimal .icon-button:hover {
+  transform: scale(1.2);
+  color: #ff8c42;
+}
 
-.menu button:hover {
-  background-color: #ddd;
+.topbar-minimal .icon-svg {
+  font-size: 28px;
 }
 
 
@@ -76,42 +98,59 @@
   width: 100%;
   padding: 40px 0;
 }
+
   /*ScrollableCards*/
   
-.card {
-    background-color: #f0f0f0;
-    padding: 16px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    height: 250px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-  }
-  
-  .image-container {
-    width: 100%;
-    height: 150px;
-    background-color: #ddd;
-    border-radius: 6px;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .card-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  
-.image-container.zoomed {
-  transform: scale(1.5);
-  z-index: 10;
-  position: relative;
+.scroll-card {
+  padding: 9px;
+  background-color: #ffe3c1;
+  border-radius: 16px;
+  height: 260px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    cursor: pointer;
+}
+
+.scroll-image-container {
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.scroll-card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.image-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.7); /* Şeffaf siyah arka plan */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  cursor: zoom-out;
+}
+
+.modal-image {
+  max-width: 90vw;
+  max-height: 90vh;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease;
+}
+
+.scroll-card:hover .scroll-card-image {
+  transform: scale(1.10); 
 }
 
 
@@ -546,52 +585,91 @@
   margin-top: 4px;
 }
     
-     /*Topbarpanel*/
-     
-.topbar-panel-container {
+  /* === TopbarAdmin Bileşeni için ÖZEL STİL === */
+
+.topbar-panel {
   width: 100%;
-  max-width: 1750px;
-  margin: 0 auto;
-  height: 70px;
-  background-color: #f5eadf;
+  height: 80px;
+  background-color: #fffaf0;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 20px;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
   position: sticky;
   top: 0;
   z-index: 100;
 }
 
-.topbar-panel-logo-container {
+.topbar-panel .logo-container {
   display: flex;
   align-items: center;
+  gap: 12px;
 }
 
-.topbar-panel-logo-container img {
-  width: 80px;
-  height: 70px;
-  margin-right: 10px;
-}
-
-.topbar-panel-logout-container {
-  display: flex;
-  align-items: center;
-}
-
-.topbar-panel-logout-button {
-  padding: 10px 20px;
-  background-color: #ff8c42;
-  color: #ffffff;
-  border: none;
-  cursor: pointer;
+.topbar-panel .logo img {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
   border-radius: 8px;
-  transition: background-color 0.3s ease;
 }
 
-.topbar-panel-logout-button:hover {
+.topbar-panel .logo-text {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #ff8c42;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.topbar-panel .center-items {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.topbar-panel .search-input {
+  padding: 8px 16px;
+  border-radius: 12px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  width: 280px;
+}
+
+.topbar-panel .menu {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.topbar-panel .menu-button {
+  padding: 10px 16px;
+  background-color: #ff8c42;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  display: flex;
+  align-items: center;
+}
+
+.topbar-panel .menu-button:hover {
   background-color: #ff7033;
+}
+
+.topbar-panel .icon-button {
+  background: none;
+  border: none;
+  font-size: 1.4rem;
+  cursor: pointer;
+  color: #444;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.topbar-panel .icon-button:hover {
+  transform: scale(1.2);
+  color: #ff8c42;
 }
 
 

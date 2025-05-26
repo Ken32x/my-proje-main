@@ -4,39 +4,44 @@ import { Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/autoplay";
 
-
 const ScrollableCards = ({ data }) => {
-  const [isZoomed, setIsZoomed] = useState(null);
+  const [zoomedImage, setZoomedImage] = useState(null);
 
-  const handleImageClick = (id) => {
-    setIsZoomed(isZoomed === id ? null : id);
+  const openModal = (imageUrl) => {
+    setZoomedImage(imageUrl);
+  };
+
+  const closeModal = () => {
+    setZoomedImage(null);
   };
 
   return (
-    <Swiper
-      spaceBetween={20}
-      slidesPerView={3}
-      loop={true}
-      autoplay={{ delay: 3000 }}
-      modules={[Autoplay]}
-    >
-      {data.map((card) => (
-        <SwiperSlide key={card.id}>
-          <div className="card">
-            {/* Resim Alanı */}
-            <div 
-              className={`image-container ${isZoomed === card.id ? "zoomed" : ""}`} 
-              onClick={() => handleImageClick(card.id)}
-            >
-              <img src={card.image} alt={card.title} className="card-image" />
+    <>
+      <Swiper
+        spaceBetween={20}
+        slidesPerView={3}
+        loop={true}
+        autoplay={{ delay: 3000 }}
+        modules={[Autoplay]}
+      >
+        {data.map((card) => (
+          <SwiperSlide key={card.id}>
+            <div className="scroll-card" onClick={() => openModal(card.image)}>
+              <div className="scroll-image-container">
+                <img src={card.image} alt="" className="scroll-card-image" />
+              </div>
             </div>
+          </SwiperSlide>
+        ))}
+      </Swiper>
 
-            {/* Başlık */}
-            <h3>{card.title}</h3>
-          </div>
-        </SwiperSlide>
-      ))}
-    </Swiper>
+      {/* Modal */}
+      {zoomedImage && (
+        <div className="image-modal" onClick={closeModal}>
+          <img src={zoomedImage} alt="Zoomed" className="modal-image" />
+        </div>
+      )}
+    </>
   );
 };
 
