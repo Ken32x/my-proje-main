@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import TopbarPanel from "@/components/TopbarPanel";
 
 const Panel = () => {
@@ -19,6 +19,47 @@ const Panel = () => {
       url: null,
     }))
   );
+
+  // ✅ Next.js API'den gelen resimleri/videoları çek
+  useEffect(() => {
+    fetch('/api/resimler')
+      .then(res => res.json())
+      .then(data => {
+        if (!Array.isArray(data)) {
+          console.error("❌ API'den dizi bekleniyordu ama gelen:", data);
+          return;
+        }
+
+        const imageFiles = data.filter(item =>
+          item.url.endsWith('.jpg') || item.url.endsWith('.jpeg') || item.url.endsWith('.png')
+        );
+
+        const videoFiles = data.filter(item =>
+          item.url.endsWith('.mp4') || item.url.endsWith('.mov') || item.url.endsWith('.webm')
+        );
+
+        setPhotos(prev => [
+          ...imageFiles.map((item, index) => ({
+            id: prev.length + index + 1,
+            name: item.ad,
+            date: new Date(item.yuklenmeTarihi).toISOString().slice(0, 10),
+            url: `http://localhost:3000${item.url}`
+          })),
+          ...prev
+        ]);
+
+        setVideos(prev => [
+          ...videoFiles.map((item, index) => ({
+            id: prev.length + index + 1,
+            name: item.ad,
+            date: new Date(item.yuklenmeTarihi).toISOString().slice(0, 10),
+            url: `http://localhost:3000${item.url}`
+          })),
+          ...prev
+        ]);
+      })
+      .catch(err => console.error("❌ Veri çekme hatası:", err));
+  }, []);
 
   const handlePhotoUpload = (event, id) => {
     const file = event.target.files[0];
